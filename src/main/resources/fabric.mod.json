@@ -15,6 +15,9 @@
     ],
     "main": [
       "com.github.charlyb01.timm.Timm"
+    ],
+    "modmenu": [
+      "com.github.charlyb01.timm.client.compat.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -28,5 +31,16 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.buymeacoffee": "https://www.buymeacoffee.com/immersivemusicmod?status=1",
+        "modmenu.discord": "https://discord.com/invite/zPZP9RT253",
+        "modmenu.modrinth": "https://modrinth.com/mod/immersivemusicmod",
+        "modmenu.patreon": "https://www.patreon.com/ImmersiveMusicMod",
+        "modmenu.youtube": "https://www.youtube.com/@goldeagleproductions"
+      }
+    }
   }
 }
