@@ -3,9 +3,15 @@
   "id": "timm",
   "version": "${version}",
   "name": "The Immersive Music Mod",
-  "description": "",
-  "authors": [],
-  "contact": {},
+  "description": "A complete overhaul to Minecraft music",
+  "authors": [
+    "Nate (music author)",
+    "Pardys (dev)"
+  ],
+  "contact": {
+    "issues": "https://github.com/sf-inc/timm/issues",
+    "sources": "https://github.com/sf-inc/timm"
+  },
   "license": "GNU GPL-3",
   "icon": "assets/timm/icon.png",
   "environment": "*",
