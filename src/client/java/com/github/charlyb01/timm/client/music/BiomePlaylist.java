@@ -1,12 +1,17 @@
 package com.github.charlyb01.timm.client.music;
 
 import com.github.charlyb01.timm.Timm;
+import com.github.charlyb01.timm.client.registry.SoundEventRegistry;
 import com.github.charlyb01.timm.config.ModConfig;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.MusicSound;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,6 +23,49 @@ import java.util.Optional;
 
 public class BiomePlaylist {
     public static final HashMap<Identifier, ArrayList<Identifier>> EVENTS_BY_BIOME = new HashMap<>();
+    private static final Identifier CREATIVE_ID = new Identifier("creative");
+    private static final Identifier MENU_ID = new Identifier("menu");
+
+    public static MusicSound getMusicSound(Identifier biomeId, Random random) {
+        ArrayList<Identifier> musics = EVENTS_BY_BIOME.get(biomeId);
+        if (musics == null || musics.isEmpty()) return null;
+
+        Identifier soundEventId = musics.get(random.nextInt(musics.size()));
+        RegistryEntry<SoundEvent> soundEvent = SoundEventRegistry.SOUNDEVENT_BY_ID.get(soundEventId);
+        if (soundEvent == null) return null;
+
+        return new MusicSound(
+                soundEvent,
+                ModConfig.get().general.minDelay * 20,
+                ModConfig.get().general.maxDelay * 20,
+                false);
+    }
+
+    public static MusicSound getCreativeMusic(Random random) {
+        ArrayList<Identifier> musics = EVENTS_BY_BIOME.get(CREATIVE_ID);
+        if (musics == null || musics.isEmpty()) return null;
+
+        Identifier soundEventId = musics.get(random.nextInt(musics.size()));
+        RegistryEntry<SoundEvent> soundEvent = SoundEventRegistry.SOUNDEVENT_BY_ID.get(soundEventId);
+        if (soundEvent == null) return null;
+
+        return new MusicSound(
+                soundEvent,
+                ModConfig.get().general.minDelay * 20,
+                ModConfig.get().general.maxDelay * 20,
+                false);
+    }
+
+    public static MusicSound getMenuMusic() {
+        ArrayList<Identifier> musics = EVENTS_BY_BIOME.get(MENU_ID);
+        if (musics == null || musics.isEmpty()) return null;
+
+        Identifier soundEventId = musics.get(0);
+        RegistryEntry<SoundEvent> soundEvent = SoundEventRegistry.SOUNDEVENT_BY_ID.get(soundEventId);
+        if (soundEvent == null) return null;
+
+        return new MusicSound(soundEvent, 20, 60, false);
+    }
 
     public static void init() {
         Timm.LOGGER.info("Initializing biome playlists");

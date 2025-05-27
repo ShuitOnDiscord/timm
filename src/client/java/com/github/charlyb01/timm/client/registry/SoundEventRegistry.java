@@ -3,10 +3,15 @@ package com.github.charlyb01.timm.client.registry;
 import com.github.charlyb01.timm.Timm;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
+import java.util.HashMap;
+
 public class SoundEventRegistry {
+    public static final HashMap<Identifier, RegistryEntry<SoundEvent>> SOUNDEVENT_BY_ID = new HashMap<>();
+
     public static void init() {
         register("menu");
 
@@ -48,6 +53,6 @@ public class SoundEventRegistry {
 
     private static void register(final String path) {
         Identifier id = Timm.id(path);
-        Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+        SOUNDEVENT_BY_ID.put(id, Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id)));
     }
 }

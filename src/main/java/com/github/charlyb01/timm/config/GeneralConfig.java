@@ -6,6 +6,11 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "general")
 public class GeneralConfig implements ConfigData {
+    @ConfigEntry.BoundedDiscrete(max = 600)
+    public int minDelay = 120;
+    @ConfigEntry.BoundedDiscrete(max = 600)
+    public int maxDelay = 300;
+
     @ConfigEntry.Gui.Excluded
     public boolean debugLog = false;
 }
