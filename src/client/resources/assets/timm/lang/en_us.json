@@ -1,5 +1,7 @@
 {
-  "song.nowPlaying.none": "Not playing any song",
+  "cmd.nowPlaying.none": "Not playing any song",
+  "cmd.stop": "Stopped playing song",
+  "cmd.stop.none": "No song to stop",
 
   "text.autoconfig.timm.title": "The Immersive Music Mod - Configuration"
 }

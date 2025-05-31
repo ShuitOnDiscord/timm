@@ -25,7 +25,7 @@ public class NowPlayingCmd {
     private static int nowPlaying(CommandContext<FabricClientCommandSource> context ) {
         Text song = Songs.getSongText(NowPlayingCmd.SONG_ID);
         Text text = song == null
-                ? Text.translatable("song.nowPlaying.none")
+                ? Text.translatable("cmd.nowPlaying.none")
                 : Text.translatable("record.nowPlaying", song);
         context.getSource().sendFeedback(text);
         return Command.SINGLE_SUCCESS;
