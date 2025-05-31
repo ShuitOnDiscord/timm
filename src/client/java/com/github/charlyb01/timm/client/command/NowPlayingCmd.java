@@ -1,5 +1,6 @@
 package com.github.charlyb01.timm.client.command;
 
+import com.github.charlyb01.timm.client.music.Songs;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -22,7 +23,11 @@ public class NowPlayingCmd {
     }
 
     private static int nowPlaying(CommandContext<FabricClientCommandSource> context ) {
-        context.getSource().sendFeedback(Text.translatable("record.nowPlaying", NowPlayingCmd.SONG_ID));
+        Text song = Songs.getSongText(NowPlayingCmd.SONG_ID);
+        Text text = song == null
+                ? Text.translatable("song.nowPlaying.none")
+                : Text.translatable("record.nowPlaying", song);
+        context.getSource().sendFeedback(text);
         return Command.SINGLE_SUCCESS;
     }
 }
