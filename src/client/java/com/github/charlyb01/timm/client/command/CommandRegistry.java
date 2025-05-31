@@ -9,6 +9,7 @@ public class CommandRegistry {
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             NowPlayingCmd.register(dispatcher);
+            OpenConfigCmd.register(dispatcher);
         });
 
         Timm.LOGGER.info("Commands successfully registered");
