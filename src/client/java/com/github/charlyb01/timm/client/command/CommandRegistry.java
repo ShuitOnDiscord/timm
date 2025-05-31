@@ -10,6 +10,7 @@ public class CommandRegistry {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             NowPlayingCmd.register(dispatcher);
             OpenConfigCmd.register(dispatcher);
+            SkipCmd.register(dispatcher);
             StopCmd.register(dispatcher);
         });
 
