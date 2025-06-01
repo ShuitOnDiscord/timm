@@ -13,8 +13,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class BiomePlaylist {
         if (path == null) return;
 
         try {
-            JsonReader jsonReader = new JsonReader(new FileReader(path.toString()));
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(Files.newInputStream(path)));
             while (jsonReader.hasNext()) {
                 JsonToken jsonToken = jsonReader.peek();
                 if (jsonToken == JsonToken.BEGIN_OBJECT) {

@@ -13,8 +13,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class Songs {
         if (path == null) return;
 
         try {
-            JsonReader jsonReader = new JsonReader(new FileReader(path.toString()));
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(Files.newInputStream(path)));
             while (jsonReader.hasNext()) {
                 JsonToken jsonToken = jsonReader.peek();
                 if (jsonToken == JsonToken.BEGIN_OBJECT) {
