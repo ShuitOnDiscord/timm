@@ -1,11 +1,14 @@
 package com.github.charlyb01.timm.client.command;
 
 import com.github.charlyb01.timm.Timm;
+import com.github.charlyb01.timm.config.ModConfig;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 
 public class CommandRegistry {
     public static void init() {
-        Timm.LOGGER.info("Registering commands");
+        if (ModConfig.get().general.debugLog) {
+            Timm.LOGGER.info("Registering commands");
+        }
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             HelpCmd.register(dispatcher);
@@ -14,7 +17,5 @@ public class CommandRegistry {
             SkipCmd.register(dispatcher);
             StopCmd.register(dispatcher);
         });
-
-        Timm.LOGGER.info("Commands successfully registered");
     }
 }

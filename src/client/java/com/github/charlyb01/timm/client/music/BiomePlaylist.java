@@ -98,11 +98,10 @@ public class BiomePlaylist {
                     EVENTS_BY_BIOME.put(biomeId, musics);
                 }
             }
+            Timm.LOGGER.info("Biome playlists successfully initialized");
         } catch (IOException e) {
             Timm.LOGGER.error("Error reading biome playlist file: {}", e.getMessage());
         }
-
-        Timm.LOGGER.info("Biome playlists successfully initialized");
     }
 
     private static Path getPath() {

@@ -64,11 +64,10 @@ public class Songs {
                     SONG_TEXT_BY_SONG_ID.put(songId, makeSongText(songId, songName, songUrl));
                 }
             }
+            Timm.LOGGER.info("Songs successfully initialized");
         } catch (IOException e) {
             Timm.LOGGER.error("Error reading songs file: {}", e.getMessage());
         }
-
-        Timm.LOGGER.info("Songs successfully initialized");
     }
 
     private static MutableText makeSongText(Identifier identifier, String name, String url) {
