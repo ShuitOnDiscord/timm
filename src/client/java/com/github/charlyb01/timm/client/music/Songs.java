@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class Songs {
         if (url != null) {
             song.setStyle(Style.EMPTY.withColor(Formatting.GREEN)
                     .withUnderline(true)
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)));
+                    .withClickEvent(new ClickEvent.OpenUrl(URI.create(url))));
         }
         return song;
     }
