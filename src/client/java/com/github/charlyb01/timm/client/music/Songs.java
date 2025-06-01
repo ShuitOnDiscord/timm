@@ -44,7 +44,7 @@ public class Songs {
                     jsonReader.endObject();
                 } else {
                     String song = jsonReader.nextName();
-                    Identifier songId = new Identifier(song);
+                    Identifier songId = Identifier.of(song);
                     String songName = null;
                     String songUrl = null;
 

@@ -21,13 +21,13 @@ import java.util.Optional;
 public class MinecraftClientMixin {
     @Shadow @Nullable public ClientPlayerEntity player;
 
-    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/client/sound/MusicType;MENU:Lnet/minecraft/sound/MusicSound;"))
+    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;MENU:Lnet/minecraft/sound/MusicSound;"))
     private MusicSound updateMenuMusic(MusicSound original) {
         MusicSound musicSound = BiomePlaylist.getMenuMusic();
         return musicSound != null ? musicSound : original;
     }
 
-    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/client/sound/MusicType;END:Lnet/minecraft/sound/MusicSound;"))
+    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;END:Lnet/minecraft/sound/MusicSound;"))
     private MusicSound updateEndMusic(MusicSound original) {
         if (this.player == null) return original;
 
@@ -39,7 +39,7 @@ public class MinecraftClientMixin {
         return musicSound != null ? musicSound : original;
     }
 
-    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/client/sound/MusicType;CREATIVE:Lnet/minecraft/sound/MusicSound;"))
+    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;CREATIVE:Lnet/minecraft/sound/MusicSound;"))
     private MusicSound updateCreativeMusic(MusicSound original) {
         if (this.player == null) return original;
 

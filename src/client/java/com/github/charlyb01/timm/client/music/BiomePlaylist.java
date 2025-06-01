@@ -23,8 +23,8 @@ import java.util.Optional;
 
 public class BiomePlaylist {
     public static final HashMap<Identifier, ArrayList<Identifier>> EVENTS_BY_BIOME = new HashMap<>();
-    private static final Identifier CREATIVE_ID = new Identifier("creative");
-    private static final Identifier MENU_ID = new Identifier("menu");
+    private static final Identifier CREATIVE_ID = Identifier.of("creative");
+    private static final Identifier MENU_ID = Identifier.of("menu");
 
     public static MusicSound getMusicSound(Identifier biomeId, Random random) {
         ArrayList<Identifier> musics = EVENTS_BY_BIOME.get(biomeId);
@@ -60,7 +60,7 @@ public class BiomePlaylist {
         ArrayList<Identifier> musics = EVENTS_BY_BIOME.get(MENU_ID);
         if (musics == null || musics.isEmpty()) return null;
 
-        Identifier soundEventId = musics.get(0);
+        Identifier soundEventId = musics.getFirst();
         RegistryEntry<SoundEvent> soundEvent = SoundEventRegistry.SOUNDEVENT_BY_ID.get(soundEventId);
         if (soundEvent == null) return null;
 
@@ -83,14 +83,14 @@ public class BiomePlaylist {
                     jsonReader.endObject();
                 } else {
                     String biomeName = jsonReader.nextName();
-                    Identifier biomeId = new Identifier(biomeName);
+                    Identifier biomeId = Identifier.of(biomeName);
                     ArrayList<Identifier> musics = new ArrayList<>();
 
                     if (jsonReader.peek() == JsonToken.BEGIN_ARRAY) {
                         jsonReader.beginArray();
                         while (jsonReader.hasNext()) {
                             String musicId = jsonReader.nextString();
-                            musics.add(new Identifier(musicId));
+                            musics.add(Identifier.of(musicId));
                         }
                         jsonReader.endArray();
                     }
