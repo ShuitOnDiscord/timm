@@ -8,6 +8,7 @@ public class CommandRegistry {
         Timm.LOGGER.info("Registering commands");
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+            HelpCmd.register(dispatcher);
             NowPlayingCmd.register(dispatcher);
             OpenConfigCmd.register(dispatcher);
             SkipCmd.register(dispatcher);

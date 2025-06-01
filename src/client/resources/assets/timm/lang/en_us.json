@@ -1,4 +1,9 @@
 {
+  "cmd.help": "List of TIMM commands:",
+  "cmd.help.cfg": "Open the mod's settings",
+  "cmd.help.nowPlaying": "Print current song",
+  "cmd.help.skip": "Skip current song / Play a new one",
+  "cmd.help.stop": "Stop current song",
   "cmd.nowPlaying.none": "Not playing any song",
   "cmd.stop": "Stopped playing song",
   "cmd.stop.none": "No song to stop",
