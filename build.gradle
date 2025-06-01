@@ -37,9 +37,7 @@ dependencies {
 
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-    modApi include("me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}"
 
     // Temporary till the beta makes it to the fabric loader
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}"))
