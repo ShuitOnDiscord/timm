@@ -3,9 +3,9 @@ package com.github.charlyb01.timm.client.mixin;
 import com.github.charlyb01.timm.client.command.NowPlayingCmd;
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
+import net.minecraft.client.sound.MusicInstance;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.sound.MusicSound;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,7 +18,7 @@ public class MusicTrackerMixin {
     @Shadow private @Nullable SoundInstance current;
 
     @Inject(method = "play", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;)V", shift = At.Shift.AFTER))
-    private void saveMusicIdentifier(MusicSound type, CallbackInfo ci) {
+    private void saveMusicIdentifier(MusicInstance music, CallbackInfo ci) {
         if (this.current == null || this.current.getSound() == null) return;
         NowPlayingCmd.SONG_ID = this.current.getSound().getIdentifier();
     }

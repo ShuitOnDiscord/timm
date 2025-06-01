@@ -9,6 +9,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.MusicSound;
+import net.minecraft.util.collection.DataPool;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,13 +22,13 @@ import java.util.Optional;
 public class MinecraftClientMixin {
     @Shadow @Nullable public ClientPlayerEntity player;
 
-    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;MENU:Lnet/minecraft/sound/MusicSound;"))
+    @ModifyExpressionValue(method = "getMusicInstance", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;MENU:Lnet/minecraft/sound/MusicSound;"))
     private MusicSound updateMenuMusic(MusicSound original) {
         MusicSound musicSound = BiomePlaylist.getMenuMusic();
         return musicSound != null ? musicSound : original;
     }
 
-    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;END:Lnet/minecraft/sound/MusicSound;"))
+    @ModifyExpressionValue(method = "getMusicInstance", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;END:Lnet/minecraft/sound/MusicSound;"))
     private MusicSound updateEndMusic(MusicSound original) {
         if (this.player == null) return original;
 
@@ -39,7 +40,7 @@ public class MinecraftClientMixin {
         return musicSound != null ? musicSound : original;
     }
 
-    @ModifyExpressionValue(method = "getMusicType", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;CREATIVE:Lnet/minecraft/sound/MusicSound;"))
+    @ModifyExpressionValue(method = "getMusicInstance", at = @At(value = "FIELD", target = "Lnet/minecraft/sound/MusicType;CREATIVE:Lnet/minecraft/sound/MusicSound;"))
     private MusicSound updateCreativeMusic(MusicSound original) {
         if (this.player == null) return original;
 
@@ -49,8 +50,8 @@ public class MinecraftClientMixin {
 
     @Definition(id = "getMusic", method = "Lnet/minecraft/world/biome/Biome;getMusic()Ljava/util/Optional;")
     @Expression("?.getMusic()")
-    @ModifyExpressionValue(method = "getMusicType", at = @At("MIXINEXTRAS:EXPRESSION"))
-    private Optional<MusicSound> updateBiomeMusic(Optional<MusicSound> original) {
+    @ModifyExpressionValue(method = "getMusicInstance", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private Optional<DataPool<MusicSound>> updateBiomeMusic(Optional<DataPool<MusicSound>> original) {
         if (this.player == null) return original;
 
         RegistryEntry<Biome> biome = this.player.getWorld().getBiome(this.player.getBlockPos());
@@ -58,6 +59,7 @@ public class MinecraftClientMixin {
         if (biomeKey.isEmpty()) return original;
 
         MusicSound musicSound = BiomePlaylist.getMusicSound(biomeKey.get().getValue(), this.player.getRandom());
-        return musicSound != null ? Optional.of(musicSound) : original;
+        DataPool<MusicSound> pool = new DataPool.Builder<MusicSound>().add(musicSound).build();
+        return musicSound != null ? Optional.of(pool) : original;
     }
 }
