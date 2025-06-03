@@ -21,7 +21,7 @@ public class HelpCmd {
                 .append(Text.translatable("cmd.help.nowPlaying"));
         Text skip = Text.literal("\n/skip /next ")
                 .append(Text.translatable("cmd.help.skip"));
-        Text stop = Text.literal("\n/stop ")
+        Text stop = Text.literal("\n/timmstop /stp ")
                 .append(Text.translatable("cmd.help.stop"));
         Text help = Text.translatable("cmd.help")
                 .append(cfg)

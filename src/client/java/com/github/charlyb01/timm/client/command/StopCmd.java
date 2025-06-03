@@ -9,7 +9,11 @@ import net.minecraft.text.Text;
 
 public class StopCmd {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(ClientCommandManager.literal("stop")
+        dispatcher.register(ClientCommandManager.literal("timmstop")
+                .requires(fabricClientCommandSource -> true)
+                .executes(StopCmd::stop));
+
+        dispatcher.register(ClientCommandManager.literal("stp")
                 .requires(fabricClientCommandSource -> true)
                 .executes(StopCmd::stop));
     }
