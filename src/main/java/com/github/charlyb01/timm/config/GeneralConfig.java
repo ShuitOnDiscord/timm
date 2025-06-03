@@ -11,6 +11,8 @@ public class GeneralConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(max = 600)
     public int maxDelay = 300;
 
+    public boolean printOnSkip = true;
+
     @ConfigEntry.Gui.Excluded
     public boolean debugLog = false;
 }
