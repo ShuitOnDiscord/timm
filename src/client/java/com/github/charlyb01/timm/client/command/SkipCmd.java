@@ -1,5 +1,6 @@
 package com.github.charlyb01.timm.client.command;
 
+import com.github.charlyb01.timm.config.ModConfig;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -23,7 +24,12 @@ public class SkipCmd {
         MusicInstance musicInstance = context.getSource().getClient().getMusicInstance();
         if (musicInstance.music() != null) {
             context.getSource().getClient().getMusicTracker().play(musicInstance);
+
+            if (ModConfig.get().general.printOnSkip) {
+                NowPlayingCmd.nowPlaying(context);
+            }
         }
+
         return Command.SINGLE_SUCCESS;
     }
 }

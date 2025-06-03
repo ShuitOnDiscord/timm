@@ -22,7 +22,7 @@ public class NowPlayingCmd {
                 .executes(NowPlayingCmd::nowPlaying));
     }
 
-    private static int nowPlaying(CommandContext<FabricClientCommandSource> context ) {
+    public static int nowPlaying(CommandContext<FabricClientCommandSource> context ) {
         Text song = Songs.getSongText(NowPlayingCmd.SONG_ID);
         Text text = song == null
                 ? Text.translatable("cmd.nowPlaying.none")
