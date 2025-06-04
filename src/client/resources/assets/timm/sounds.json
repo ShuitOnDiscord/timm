@@ -166,6 +166,7 @@
     "sounds": [
       "timm:choral_vortex",
       "timm:guardians_anthem",
+      "timm:musical_waves",
       "timm:kart_minne",
       "timm:sea_foam"
     ]
@@ -197,6 +198,7 @@
 
   "snow_plains": {
     "sounds": [
+      "timm:doctor_pavlolich",
       "timm:nataryuk",
       "timm:paiva_lumessa",
       "timm:polar_t_block",
@@ -258,6 +260,7 @@
       "timm:appletrees_demise",
       "timm:burning_etherealism",
       "timm:lava_pools",
+      "timm:track_3",
       "timm:track_7",
       "timm:track_9"
     ]
